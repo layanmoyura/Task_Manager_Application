@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\training_2\\backend\\backend.csproj": {}
+    "D:\\training_2\\Task_Manager_Application\\backend\\backend.csproj": {}
   },
   "projects": {
-    "D:\\training_2\\backend\\backend.csproj": {
+    "D:\\training_2\\Task_Manager_Application\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\training_2\\backend\\backend.csproj",
+        "projectUniqueName": "D:\\training_2\\Task_Manager_Application\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "D:\\training_2\\backend\\backend.csproj",
+        "projectPath": "D:\\training_2\\Task_Manager_Application\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "D:\\training_2\\backend\\obj\\",
+        "outputPath": "D:\\training_2\\Task_Manager_Application\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
