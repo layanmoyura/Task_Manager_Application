@@ -24,18 +24,36 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskModel>>> GetTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            try
+            {
+                return await _context.Tasks.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details here
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
         // POST: api/Tasks
         [HttpPost]
         public async Task<IActionResult> PostTask(TaskModel task)
         {
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Tasks.Add(task);
+                await _context.SaveChangesAsync();
 
-            return StatusCode(200);
+                return Ok(task);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details here
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
         // PUT: api/Tasks/5
         [HttpPut("{id}")]
@@ -43,29 +61,65 @@ namespace backend.Controllers
         {
             if (id != task.Id)
             {
-                return BadRequest();
+                return BadRequest("Task ID mismatch");
             }
 
-            _context.Entry(task).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Entry(task).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
 
-            return StatusCode(200);
+                return Ok(task);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TaskExists(id))
+                {
+                    return NotFound($"Task with id {id} not found");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details here
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
+
 
         // DELETE: api/Tasks/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task == null)
+            try
             {
-                return NotFound();
+                var task = await _context.Tasks.FindAsync(id);
+                if (task == null)
+                {
+                    return NotFound($"Task with id {id} not found");
+                }
+
+                _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+
+                return Ok($"Task with id {id} deleted successfully");
             }
+            catch (Exception ex)
+            {
+                // Log the exception details here
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
 
-            return StatusCode(200);
+
+        private bool TaskExists(int id)
+        {
+            return _context.Tasks.Any(e => e.Id == id);
         }
     }
 }
