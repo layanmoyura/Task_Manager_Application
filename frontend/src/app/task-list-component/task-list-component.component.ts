@@ -50,4 +50,23 @@ export class TaskListComponentComponent {
       ).subscribe();
   }
 
+  public deleteTask(id: number) {
+    this.service.deleteTask(id)
+      .pipe(
+        tap((data)=>{
+          console.log(data);
+          console.log('success');
+          this.toastr.success('Task deleted successfully.');
+          this.refreshList();
+        }),
+        catchError((error) => {
+          this.toastr.error('Task is not deleted.');
+          console.log(error);
+          console.log('failed');
+          return throwError(() => error); 
+        })
+      ).subscribe();
+  }
+
+
 }

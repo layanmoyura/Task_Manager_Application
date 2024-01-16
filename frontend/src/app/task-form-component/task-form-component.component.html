@@ -1,1 +1,46 @@
-<p>task-form-component works!</p>
+<h2 class="create-header">{{studentId ? 'Update Task' : 'Create Task'}}</h2>
+
+
+<div class="justify-content-center">
+  <mat-card class="col-md-6 justify-content-center">
+    <mat-card-header></mat-card-header>
+    <mat-card-content>
+
+      <form id="frmAdmin" (ngSubmit)="form.form.valid && (studentId ? updateTask() : addTask())" class="form" #form="ngForm">
+        <div class="form-group">
+          <label for="title">Task Title</label>
+          <input id="title" name="title" type="text" [(ngModel)]="taskModel.title" placeholder="Enter Task Title" class="form-control inputs" required />
+          <div *ngIf="form.submitted && form.controls['title']?.invalid" class="text-danger">
+            Task Title is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Task Description</label>
+          <input id="description" name="description" type="text" [(ngModel)]="taskModel.description" placeholder="Enter Task Description" class="form-control inputs" required />
+          <div *ngIf="form.submitted && form.controls['description']?.invalid" class="text-danger">
+            Task Description is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dueDate">Due Date</label>
+          <input id="dueDate" name="dueDate" type="date" [(ngModel)]="taskModel.dueDate" placeholder="Select due date" class="form-control inputs" required />
+          <div *ngIf="form.submitted && form.controls['dueDate']?.invalid" class="text-danger">
+            Due Date is required and must be a valid date.
+          </div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="btnSignUp">{{studentId ? 'Update' : 'Add Task'}}</button>
+            <button type="button" class="btn btn-secondary" id="btnCancel" (click)="form.reset();" style="margin-left: 10px;">Cancel</button>
+        </div>
+
+      </form>
+
+    </mat-card-content>
+
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
+</div>

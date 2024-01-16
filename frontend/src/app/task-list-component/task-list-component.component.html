@@ -38,7 +38,7 @@
 
                 <button mat-raised-button color="accent">Details</button>
                 <button mat-raised-button color="primary" [routerLink]="['/edit',element.id]">Edit</button>
-                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="warn" (click)="deleteTask(element.id)">Delete</button>
 
             
             </td>

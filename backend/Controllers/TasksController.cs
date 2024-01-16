@@ -30,10 +30,34 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception details here
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+      
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
             }
         }
+
+    
+        // GET: api/Tasks/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TaskModel>> GetTask(int id)
+        {
+            try
+            {
+                var task = await _context.Tasks.FindAsync(id);
+
+                if (task == null)
+                {
+                    return NotFound(new { message = "Task with id not found" });
+                }
+
+                return Ok(task);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
+            }
+        }
+
 
 
         // POST: api/Tasks
@@ -49,8 +73,8 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception details here
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+               
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
             }
         }
 
@@ -61,7 +85,7 @@ namespace backend.Controllers
         {
             if (id != task.Id)
             {
-                return BadRequest("Task ID mismatch");
+                return BadRequest(new {message = "Task ID mismatch" });
             }
 
             try
@@ -75,7 +99,7 @@ namespace backend.Controllers
             {
                 if (!TaskExists(id))
                 {
-                    return NotFound($"Task with id {id} not found");
+                    return NotFound(new {message = "Task with id not found" });
                 }
                 else
                 {
@@ -84,12 +108,14 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception details here
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+               
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
             }
         }
 
 
+
+        // DELETE: api/Tasks/5
 
         // DELETE: api/Tasks/5
         [HttpDelete("{id}")]
@@ -100,20 +126,21 @@ namespace backend.Controllers
                 var task = await _context.Tasks.FindAsync(id);
                 if (task == null)
                 {
-                    return NotFound($"Task with id {id} not found");
+                    return NotFound(new { message = "Task with id not found" });
                 }
 
                 _context.Tasks.Remove(task);
                 await _context.SaveChangesAsync();
 
-                return Ok($"Task with id {id} deleted successfully");
+                return Ok(new { message = "Task with id deleted successfully" });
             }
             catch (Exception ex)
             {
-                // Log the exception details here
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+               
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
             }
         }
+
 
 
 
