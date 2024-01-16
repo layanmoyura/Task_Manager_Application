@@ -1,0 +1,60 @@
+
+<h2 class="index-header">Index</h2>
+
+
+
+<mat-card>
+    <mat-card-header></mat-card-header>
+    <mat-card-content>
+
+   
+
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+
+        <ng-container matColumnDef="id">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Task ID</th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Task Title</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">{{element.description}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+            <th 
+            mat-sort-header mat-header-cell *matHeaderCellDef>Joined Date</th>
+            <td mat-cell *matCellDef="let element">{{element.dueDate | date:'yyyy-MM-dd'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+
+                <button mat-raised-button color="accent">Details</button>
+                <button mat-raised-button color="primary" [routerLink]="['/edit',element.id]">Edit</button>
+                <button mat-raised-button color="warn">Delete</button>
+
+            
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+
+    </table>
+
+    </mat-card-content>
+
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-footer>
+
+</mat-card>

@@ -1,0 +1,37 @@
+
+
+.custom-navbar {
+background-color: rgb(6, 38, 180);
+color: #fff;
+width: 100%;
+height: 80px;
+font-size: large;
+}
+
+.mat-sidenav {
+width: 200px; 
+}
+
+.mat-sidenav-content {
+margin-left: 250px;
+width: calc(100% - 250px); 
+}
+
+.footer {
+background-color: rgb(6, 38, 180);
+color: #fff;
+width: 100%;
+height: 50px;
+}
+
+@media (max-width: 600px) {
+.mat-sidenav {
+    width: 100%;
+}
+
+.mat-sidenav-content {
+    margin-left: 0;
+    width: 100%;
+}
+}
+
