@@ -1,16 +1,8 @@
 .index-header {
-    font-size: 3em; 
-    margin-top: 35px;
-    margin-left: 15%;
-}
-
-.create-new {
-    margin-top: 10px;
-    margin-left: 15%;
-}
-
-.create-new a {
-    font-size: 1.2em; /* Adjust the font size of the link as needed */
+    font-size: 4em; 
+    margin-top: 40px;
+    margin-left: 10%;
+    margin-bottom: 10px;
 }
 
 button{
@@ -18,7 +10,8 @@ button{
 }
 
 mat-card {
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
     
 }

@@ -27,6 +27,11 @@ namespace backend
             services.AddDbContext<TaskContext>(opt =>
                                         opt.UseInMemoryDatabase("TaskList"));
             services.AddControllers();
+
+            services.AddCors(options => options.AddDefaultPolicy(
+
+                builder => builder.WithOrigins("http://localhost:4201").AllowAnyMethod().AllowAnyHeader()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
@@ -54,7 +59,7 @@ namespace backend
                 context.SaveChanges();
 
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
