@@ -22,8 +22,6 @@ export class TaskListComponentComponent {
   taskList: any;
   dataSource: any;
   displayedColumns: string[] = ['title', 'description', 'dueDate', 'actions'];
-  taskModel:taskModel=new taskModel();
-  showDetailsModal: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator|undefined;
   @ViewChild(MatSort) sort: MatSort|undefined;
@@ -74,28 +72,7 @@ export class TaskListComponentComponent {
       ).subscribe();
   }
 
-  public openDetailsModal(id:any){
-    this.service.getdetailTask(id)
-    .pipe(
-      tap((data)=>{
-        console.log(data);
-        console.log('success');
-        console.log(this.showDetailsModal)
-        this.taskModel=data;
-        this.taskModel.dueDate = this.datePipe.transform(this.taskModel.dueDate, 'yyyy-MM-dd');
-        console.log(this.taskModel.dueDate);
-        this.showDetailsModal = true;
-        console.log(this.showDetailsModal)
-        
-      }),
-      catchError((error) => {
-        this.toastr.error('Task is not loaded.');
-        console.log(error);
-        console.log('failed');
-        return throwError(() => error); 
-      })
-    ).subscribe();
-  }
+  
   
   
   

@@ -15,16 +15,16 @@ import { DatePipe } from '@angular/common';
 export class TaskFormComponentComponent {
 
   taskModel:taskModel=new taskModel();
-  studentId = this.route.snapshot.paramMap.get('id');
+  taskId = this.route.snapshot.paramMap.get('id');
 
 
   constructor(private datePipe:DatePipe, private route:ActivatedRoute,private service:TaskServiceService, private toastr:ToastrService,private router:Router){}
 
 
   ngOnInit(): void {
-    console.log(this.studentId);
-    if(this.studentId!=null){
-      this.getTaskDetail(this.studentId);
+    console.log(this.taskId);
+    if(this.taskId!=null){
+      this.getTaskDetail(this.taskId);
     }
   }
 
@@ -50,9 +50,9 @@ export class TaskFormComponentComponent {
   }
 
   public updateTask(){
-    if(this.studentId!=null){
+    if(this.taskId!=null){
       console.log(this.taskModel);
-    this.service.updateTask(this.studentId,this.taskModel)
+    this.service.updateTask(this.taskId,this.taskModel)
     .pipe(
       tap((data)=>{
         console.log(data);

@@ -1,4 +1,4 @@
-<h2 class="create-header">{{studentId ? 'Update Task' : 'Create Task'}}</h2>
+<h2 class="create-header">{{taskId ? 'Update Task' : 'Create Task'}}</h2>
 
 
 <div class="justify-content-center">
@@ -6,7 +6,7 @@
     <mat-card-header></mat-card-header>
     <mat-card-content>
 
-      <form id="frmAdmin" (ngSubmit)="form.form.valid && (studentId ? updateTask() : addTask())" class="form" #form="ngForm">
+      <form id="frmAdmin" (ngSubmit)="form.form.valid && (taskId ? updateTask() : addTask())" class="form" #form="ngForm">
         <div class="form-group">
           <label for="title">Task Title</label>
           <input id="title" name="title" type="text" [(ngModel)]="taskModel.title" placeholder="Enter Task Title" class="form-control inputs" required />
@@ -33,7 +33,7 @@
 
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="btnSignUp">{{studentId ? 'Update' : 'Add Task'}}</button>
+            <button type="submit" class="btn btn-primary" id="btnSignUp">{{taskId ? 'Update' : 'Add Task'}}</button>
             <button type="button" class="btn btn-secondary" id="btnCancel" (click)="form.reset();" style="margin-left: 10px;">Cancel</button>
         </div>
 
