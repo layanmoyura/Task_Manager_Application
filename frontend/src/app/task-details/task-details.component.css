@@ -1,26 +1,25 @@
 .det-header {
-    font-size: 4em; 
+    font-size: 4em;
     margin-top: 35px;
     margin-left: 25%;
-}
+  }
 
-.index-header {
+  .index-header {
     margin-top: 10px;
     margin-left: 25%;
-}
+  }
 
-.index-header a {
+  .index-header a {
     font-size: 1.2em;
-    font-weight: bolder; /* Adjust the font size of the link as needed */
-}
+    font-weight: bolder;
+  }
 
-mat-card {
+  mat-card {
     margin-left: 25%;
     margin-right: 25%;
-    
-}
-
-dl.row dt {
-    margin-bottom: 10px;
   }
-  
+
+  dl.row dt {
+    margin-bottom: 50px;
+    
+  }
