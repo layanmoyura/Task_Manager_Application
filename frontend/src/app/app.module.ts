@@ -26,12 +26,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponentComponent,
-    TaskFormComponentComponent
+    TaskFormComponentComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,10 +55,13 @@ import { DatePipe } from '@angular/common';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DatePipe,
+    
+    
     
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

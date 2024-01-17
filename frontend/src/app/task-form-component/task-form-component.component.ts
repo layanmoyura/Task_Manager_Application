@@ -18,7 +18,7 @@ export class TaskFormComponentComponent {
   studentId = this.route.snapshot.paramMap.get('id');
 
 
-  constructor(private route:ActivatedRoute,private service:TaskServiceService, private toastr:ToastrService,private router:Router){}
+  constructor(private datePipe:DatePipe, private route:ActivatedRoute,private service:TaskServiceService, private toastr:ToastrService,private router:Router){}
 
 
   ngOnInit(): void {
@@ -81,7 +81,9 @@ export class TaskFormComponentComponent {
         console.log(data);
         console.log('success');
         this.taskModel=data;
-        //this.taskModel.dueDate=new DatePipe('en-US').transform(this.taskModel.dueDate, 'yyyy-MM-dd');
+        this.taskModel.dueDate = this.datePipe.transform(this.taskModel.dueDate, 'yyyy-MM-dd');
+        console.log(this.taskModel.dueDate);
+        
       }),
       catchError((error) => {
         this.toastr.error('Task is not loaded.');

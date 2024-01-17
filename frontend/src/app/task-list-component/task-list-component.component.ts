@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TaskServiceService } from '../task-service/task-service.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { taskModel } from '../../model/TaskModel';
+import { DatePipe } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-task-list-component',
@@ -19,10 +22,13 @@ export class TaskListComponentComponent {
   taskList: any;
   dataSource: any;
   displayedColumns: string[] = ['title', 'description', 'dueDate', 'actions'];
+  taskModel:taskModel=new taskModel();
+  showDetailsModal: boolean = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator|undefined;
   @ViewChild(MatSort) sort: MatSort|undefined;
 
-  constructor(private toastr: ToastrService, private service: TaskServiceService, private router: Router) { }
+  constructor(private toastr: ToastrService, private service: TaskServiceService, private router: Router,private datePipe:DatePipe) { }
 
   ngOnInit(): void {
     this.refreshList();
@@ -67,6 +73,34 @@ export class TaskListComponentComponent {
         })
       ).subscribe();
   }
+
+  public openDetailsModal(id:any){
+    this.service.getdetailTask(id)
+    .pipe(
+      tap((data)=>{
+        console.log(data);
+        console.log('success');
+        console.log(this.showDetailsModal)
+        this.taskModel=data;
+        this.taskModel.dueDate = this.datePipe.transform(this.taskModel.dueDate, 'yyyy-MM-dd');
+        console.log(this.taskModel.dueDate);
+        this.showDetailsModal = true;
+        console.log(this.showDetailsModal)
+        
+      }),
+      catchError((error) => {
+        this.toastr.error('Task is not loaded.');
+        console.log(error);
+        console.log('failed');
+        return throwError(() => error); 
+      })
+    ).subscribe();
+  }
+  
+  
+  
+  
+  
 
 
 }
